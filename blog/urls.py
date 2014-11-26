@@ -11,4 +11,12 @@ urlpatterns = patterns('',
 								model = Post,
 								template_name="post.html")),
 
+						url(r'^archives/$', ListView.as_view(
+								queryset=Post.objects.all().order_by("-created_at"),
+								template_name="postlist.html")),
+
+						url(r'^latestnews/$', ListView.as_view(
+								queryset=Post.objects.all().order_by("-created_at")[:5],
+								template_name="postlist.html")),
+
 )
