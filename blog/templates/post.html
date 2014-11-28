@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
-
+{% for post in posts.object_list %}
+{% endfor %}
 <h2><a href="/blog/{{ post.id }}">{{ post.title }}</a></h2>
 <div class = "post_meta">
 	on {{ post.created_at }}
@@ -9,6 +10,30 @@
 <div class = "post_body">
 	{{ post.body|safe|linebreaks }}
 </div>
+
+<div class = "pad">
+    &nbsp;
+</div>
+
+<p>Add a comment:</p>
+<!-- Comment form  -->
+<form action="{% url "blog.views.add_comment" post.id %}" method="POST">{% csrf_token %}
+    <div id="cform">
+        Name: {{ form.author }}
+        <p>{{ form.body }}</p>
+    </div>
+    <div id="submit"><input type="submit" value="Submit"></div>
+</form>
+
+{% if comments %}
+    <p>Comments:</p>
+{% endif %}
+
+{% for comment in comments %}
+    <div class="comment">
+        <div class="commentbody">{{ comment.created_at }} | {{ comment.author }}  {{ comment.body|linebreaks }}</div>    
+    </div>
+{% endfor %}
 
 
 {% endblock %}

@@ -1,13 +1,14 @@
 from django.conf.urls import patterns, include, url
 from django.views.generic import ListView, DetailView
-from blog.models import Post
+from blog.models import Post, Comment
+
 
 urlpatterns = patterns('blog.views',
 	url(r"^$", "main"),
 
-	url(r'^(?P<pk>\d+)$', DetailView.as_view(
-		model = Post,
-		template_name="post.html")),
+	url(r"^(\d+)/$", "post"),	
+
+	url(r"^add_comment/(\d+)/$", "add_comment"),
 
 	url(r'^archives/$', ListView.as_view(
 		queryset=Post.objects.all().order_by("-created_at"),
