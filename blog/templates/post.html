@@ -12,7 +12,7 @@
 </div>
 
 <div class = "pad">
-    &nbsp;
+    
 </div>
 
 <p>Add a comment:</p>
@@ -29,11 +29,23 @@
     <p>Comments:</p>
 {% endif %}
 
+
+<form action="{% url "blog.views.delete_comment" post.pk %}" method="POST">{% csrf_token %}
 {% for comment in comments %}
     <div class="comment">
-        <div class="commentbody">{{ comment.created_at }} | {{ comment.author }}  {{ comment.body|linebreaks }}</div>    
+        <div class="commentbody">{{ comment.created_at }} | {{ comment.author }}  {{ comment.body|linebreaks }}</div>
+        {% if user.is_staff %}
+            <input type="checkbox" name="delete" value="{{ comment.pk }}">
+            <a href="{% url "blog.views.delete_comment" post.pk comment.pk %}">Delete</a>
+        {% endif %}
     </div>
 {% endfor %}
+
+{% if user.is_staff and comments %}
+    <p><input type="submit" value="Delete all selected"></p>
+    <br />
+{% endif %}
+</form>
 
 
 {% endblock %}

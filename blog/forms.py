@@ -25,3 +25,13 @@ def add_comment(request, pk):
 		comment.author = author
 		comment.save()
 	return HttpResponseRedirect(reverse("blog.views.post", args=[pk]))
+
+def delete_comment(request,post_pk, pk=None):
+	"""form for comment deletion"""
+	if request.user.is_staff:
+		if not pk: pklst = request.POST.getlist("delete")
+		else: pklst = [pk]
+
+	for pk in pklst:
+		Comment.objects.get(pk=pk).delete()
+	return HttpResponseRedirect(reverse("blog.views.post", args=[post_pk]))

@@ -10,6 +10,10 @@ urlpatterns = patterns('blog.views',
 
 	url(r"^add_comment/(\d+)/$", "add_comment"),
 
+	url(r"^delete_comment/(\d+)/$", "delete_comment"),
+
+	url(r"^delete_comment/(\d+)/(\d+)/$", "delete_comment"),
+
 	url(r'^archives/$', ListView.as_view(
 		queryset=Post.objects.all().order_by("-created_at"),
 		template_name="postlist.html")),
