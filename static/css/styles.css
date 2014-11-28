@@ -60,6 +60,7 @@ a:hover, a:active{
 .sideInfo {
 	width: 15%;
 	float:left;
+	text-align: center;
 	margin: 1% 0% 1% 0%;
 	border-radius: 7px;
 	-webkit-border-radius: 7px;
