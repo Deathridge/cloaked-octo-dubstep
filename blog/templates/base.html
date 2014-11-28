@@ -11,13 +11,17 @@
 </head>
 
 <body class="body">
-	<header class="mainHead">
-		<img src="/static/img/mainlogo.jpg" width="500px" height="200px">
+	<header class="mainHead">		
+		<img src="/static/img/mainlogo.jpg" width="500px" height="250px">
 		<nav><ul>
 			<li><a href="/">Home</a></li>
 			<li><a href="/blog">Blog</a></li>
 			<li><a href="/blog/latestnews">News</a></li>
 			<li><a href="/blog/archives">Archives</a></li>
+			{% if user.is_staff %}
+			<li><a href="{% url 'admin:index' %}">Admin</a></li>
+            <li><a href="{% url 'admin:blog_post_add' %}">Add post</a></li>
+            {% endif %}
 		</ul></nav>
 
 	</header>
