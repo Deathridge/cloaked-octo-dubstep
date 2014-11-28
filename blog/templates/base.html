@@ -30,7 +30,7 @@
 			<h3>Recent News</h3>
 			{% for post in posts.object_list %}
 
-			<p> {{post.created_at|date:"Y-m-d"}}<a href="/blog/{{ post.id }}"> {{ post.title }}</a></p>
+			<p> {{post.created_at|date:"Y-m-d"}} <a href="/blog/{{ post.id }}"> {{ post.title }}</a></p>
 
 			{% endfor %}
 
